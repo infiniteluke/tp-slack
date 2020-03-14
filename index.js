@@ -32,13 +32,15 @@ module.exports = async (req, res) => {
   try {
     const body = parse(await text(req))
     const { user } = await web.users.info({ user: body.user_id });
-    result = `${user.real_name} failed to grab any :tp:. Try /tp grab`
+    result = `${user.real_name} failed to grab any :tp:. Try \`/tp grab\``
     let [cmd, num = 1] = body.text.split(' ');
     num = Number.isNaN(num / 1) || num < 0 ? 0 : Math.floor(num);
     if (cmd === 'help') {
-      result = `/tp grab {number} -- Grab some :tp:
+      result = `\`\`\`
+/tp grab {number} -- Grab some :tp:
 /tp stats -- See who won /tp score, /tp scoreboard
-/tp reset -- Restock the store`
+/tp reset -- Restock the store
+\`\`\``
     } else if (cmd === 'reset') {
       if (rolls === 0) {
         reset();
@@ -55,7 +57,7 @@ module.exports = async (req, res) => {
         result = `Sorry. There are only ${rolls} :tp: left at this store. Check back later.`
       }
       else if (rolls <= 0) {
-        result = 'Sorry. There is no :tp: left at this store. Check back later. Try /tp reset'
+        result = 'Sorry. There is no :tp: left at this store. Check back later. Try \`/tp reset\`'
       } else {
         rolls -= num;
         if (score[user.real_name]) {
@@ -79,7 +81,7 @@ module.exports = async (req, res) => {
       result = sortedScores.reduce((cur, [name, score]) => `${cur}
 ${name}: ${score}`,'Scoreboard:')
       } else {
-        result = 'Scoreboard is empty. Try /tp reset to start a game'
+        result = 'Scoreboard is empty. Try \`/tp reset\` to start a game'
       }
     }
   } catch (error) {
