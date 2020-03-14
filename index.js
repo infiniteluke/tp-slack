@@ -40,7 +40,8 @@ module.exports = async (req, res) => {
 /tp grab {number} -- Grab some :tp:
 /tp stats -- See who won /tp score, /tp scoreboard
 /tp reset -- Restock the store
-\`\`\``
+\`\`\`
+Made with :heart: by luke: https://github.com/infiniteluke/tp-slack`
     } else if (cmd === 'reset') {
       if (rolls === 0) {
         reset();
